@@ -1,0 +1,32 @@
+.login-page {
+	width: 100%;
+	height: 100vh;
+	justify-content: center;
+	&::before {
+		content: "";
+		position: absolute;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url('https://cdn.f5-store.cn/front_end/f5futurestore_dva/images/login_bg.jpg');
+		background-size: 100% 100%;
+		filter: blur(10px);
+	}
+	h1 {
+		font-size: 40px;
+		font-weight: bold;
+		position: fixed;
+		top: 8%;
+		color: #fff;
+	}
+	.form-wrap {
+		position: relative;
+		z-index: 1;
+		background-color: #fff;
+		width: 550px;
+		height: 450px;
+		padding-right: 40px;
+		border-radius: 10px;
+		box-shadow: 0 0 10px 5px rgba($color: #fff, $alpha: .4);
+	}
+}
