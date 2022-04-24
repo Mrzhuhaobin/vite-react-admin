@@ -1,9 +1,9 @@
 import axios from "axios";
 import { message as Message } from "antd";
-import { useNavigate } from "react-router-dom";
+import utils from "@/utils";
 
 const request = axios.create({
-	baseURL: '',
+	baseURL: 'http://192.168.0.173:3002',
 	timeout: 1000 * 20,
 	headers: {
 		'Content-Type': 'application/json;charset=UTF-8',
@@ -11,22 +11,14 @@ const request = axios.create({
 	}
 })
 // const navigate = useNavigate();
-function addToken (config) {
-	const token = sessionStorage.getItem('token')
-	if (token) {
-	 config.headers.token = token
-	}
-	return config
- }
+
  function removeToken () {
-	sessionStorage.removeItem('token');
-	const navigate = useNavigate();
-	navigate('/login');
+	utils.removeLoginInfo()
  }
 
 request.interceptors.request.use(
 	config => {
-		return addToken(config)
+		return config
 	},
 	error => {
 		return Promise.reject(error)

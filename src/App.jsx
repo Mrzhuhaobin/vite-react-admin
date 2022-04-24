@@ -17,7 +17,6 @@ function App () {
   const isLogin = useSelector(state => state.user.isLogin);
 	return (
 		<Routes>
-      {/* <PrivateRoute> */}
       <Route path="/" element={<Home/>}>
 				{
 					routes.map(route => {
@@ -28,7 +27,6 @@ function App () {
 				}
         <Route path="*" element={<ErrorPage/>} />
       </Route>
-      {/* </PrivateRoute> */}
 			<Route path="/login" element={<Login/>}></Route>
 			
 		</Routes>

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Checkbox } from 'antd';
 import { useNavigate, useLocation } from "react-router-dom";
+import { setLogin } from '@/model/user'
+import { useDispatch } from "react-redux";
+import utils from '@/utils';
 import './index.scss';
 
 function Index (props) {
 	const navigate = useNavigate()
-	useEffect(() => {
-		console.log(123)
-	}, [])
+	const dispatch = useDispatch();
+
 	const layout = {
 		labelCol: { span: 8 },
 		wrapperCol: { span: 16 },
@@ -17,7 +19,12 @@ function Index (props) {
 	};
 	const onFinish = (values) => {
     console.log('Success:', values);
-		navigate('/')
+		dispatch(setLogin({
+			...values,
+			isLogin: true
+		}));
+		utils.setLoginInfo(values.userName)
+		navigate('/', {replace: true})
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -41,7 +48,7 @@ function Index (props) {
 				>
 					<Form.Item
 						label="用户名："
-						name="username"
+						name="userName"
 						rules={[
 							{
 								required: true,

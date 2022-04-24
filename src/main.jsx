@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux';
 import './index.scss';
 import 'antd/dist/antd.css';
+import './style/myTheme.scss';
+import RouterJump from '@/components/RouteJump.jsx'
 import store from './store';
 import App from './App'
 
@@ -12,6 +14,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Provider store={store}>
         <App />
+        <RouterJump/>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

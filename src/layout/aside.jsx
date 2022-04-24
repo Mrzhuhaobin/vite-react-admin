@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Menu, Avatar, Button } from 'antd';
-import { UserOutlined, LoginOutlined } from '@ant-design/icons';
+import { Menu, Button } from 'antd';
 import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { setLogin } from '@/model/user'
+import utils from '@/utils';
 import { routes } from '../router';
 
 
@@ -10,7 +12,20 @@ import { routes } from '../router';
 const Aside = () => {
 	const [currentPath, setPath] = useState('');
 	const navigate  = useNavigate();
+	const dispatch = useDispatch();
 	const location = useLocation();
+	const user = useSelector(state => state.user)
+
+	const logout = async () => {
+    dispatch(setLogin({
+			userName: '',
+			isLogin: false
+		}));
+    utils.removeLoginInfo()
+
+    navigate('/login', {replace: true})
+  }
+
 	useEffect(() => {
 		setPath(location.pathname)
 	}, [location])
@@ -30,13 +45,13 @@ const Aside = () => {
 				}
 			</Menu>
 			<div className='aside-avatar'>
-				<Avatar size={64} icon={<UserOutlined />} />
+				<span style={{color: '#fff'}}>{user.userName}</span>
 				<Button
-				style={{marginLeft: '40px'}}
-				shape='circle'
-				icon={<LoginOutlined rotate={90} />}
-				onClick={() => navigate('/login')}
+				style={{marginLeft: '20px'}}
+				type="link"
+				onClick={() => logout()}
 				>
+					退出登录
 				</Button>
 			</div>
 		</div>

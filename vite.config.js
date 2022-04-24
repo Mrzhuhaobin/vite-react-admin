@@ -10,13 +10,20 @@ export default defineConfig({
       "@": path.resolve(__dirname, 'src')
     },
   },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'https://admindev.f5-futurestore.com',
-        changeOrigin: true
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `$bg_color: #ff00aa; $font_color: #fff;`
       }
     }
+  },
+  server: {
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://192.168.0.173:3002',
+    //     changeOrigin: true
+    //   }
+    // }
   }
   
 })

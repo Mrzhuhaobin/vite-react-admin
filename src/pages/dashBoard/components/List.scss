@@ -1,0 +1,14 @@
+
+
+$bg_color: red !default;
+$font_color: green !default;
+
+
+
+// @import "../../../style/myTheme.scss";
+
+
+.list-item {
+  background-color: $bg_color;
+  color: $font_color;
+}
