@@ -3,7 +3,7 @@ import { message as Message } from "antd";
 import utils from "@/utils";
 
 const request = axios.create({
-	baseURL: 'http://192.168.0.173:3002',
+	baseURL: '',
 	timeout: 1000 * 20,
 	headers: {
 		'Content-Type': 'application/json;charset=UTF-8',

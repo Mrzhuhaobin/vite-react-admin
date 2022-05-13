@@ -1,29 +1,42 @@
-import React, { useEffect, useState } from "react";
-import request from "@/service/request";
-import List from './components/List.jsx'
+import React, { lazy, Suspense } from "react";
+import { Tabs } from 'antd';
 
-function Index (props) {
-	const [list, setList] = useState([])
-	const getList = async () => {
-		const res = await request({
-			url: '/api/list',
-			method: 'post'
-		});
-		console.log(1111, res)
-		setList(res.list)
-	}
-	useEffect(() => {
-		getList()
-	}, [])
+const { TabPane } = Tabs;
+
+
+function Index () {
+	const tabList = [
+		{
+			tabName: 'tab 1',
+			id: 1,
+			component: lazy(() => import('./components/List.jsx'))
+		},
+		{
+			tabName: 'tab 2',
+			id: 2,
+			component: lazy(() => import('./components/About.jsx'))
+		},
+	]
+	
+	// 测试异步组件
+	
+	const Loading = () => <div>loading····</div>
 	return (
 		<div className="page dashboard">
-			首页
-
-			<ul>
-				<List list={list}/>
-			</ul>
+			<Tabs defaultActiveKey={1} >
+				{
+					tabList.map(item => {
+						return (
+							<TabPane tab={item.tabName} key={item.id}>
+								<Suspense fallback={<Loading/>}>
+									<item.component/>
+								</Suspense>
+							</TabPane>
+						)
+					})
+				}
+			</Tabs>
 		</div>
-
 	)
 }
 

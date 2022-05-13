@@ -1,4 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import request from '@/service/request';
+
+export const doLogin = createAsyncThunk(
+  'user/doLogin',
+  async (params) => {
+    const res = await request({
+      method: 'post',
+      url: '/api/login',
+      data: params
+    })
+    return res
+  }
+
+)
 
 export const user = createSlice({
   name: 'user',
@@ -16,6 +30,13 @@ export const user = createSlice({
     incrementByAmount: (state, action) => {
       console.log('add', action)
       state.value += action.payload
+    }
+  },
+  extraReducers: {
+    [doLogin.fulfilled]: (state, action) => {
+      console.log('action', action.payload)
+      state.isLogin = true;
+      state.userName = action.payload.userName;
     }
   }
 })

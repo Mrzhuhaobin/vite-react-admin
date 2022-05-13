@@ -18,12 +18,12 @@ export default defineConfig({
     }
   },
   server: {
-    // proxy: {
-    //   '/api': {
-    //     target: 'http://192.168.0.173:3002',
-    //     changeOrigin: true
-    //   }
-    // }
+    proxy: {
+      '/api': {
+        target: 'http://192.168.0.173:3002',
+        changeOrigin: true
+      }
+    }
   }
   
 })

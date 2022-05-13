@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Button, Checkbox } from 'antd';
 import { useNavigate, useLocation } from "react-router-dom";
-import { setLogin } from '@/model/user'
+import { setLogin, doLogin } from '@/model/user'
 import { useDispatch } from "react-redux";
 import utils from '@/utils';
 import './index.scss';
@@ -19,10 +19,11 @@ function Index (props) {
 	};
 	const onFinish = (values) => {
     console.log('Success:', values);
-		dispatch(setLogin({
-			...values,
-			isLogin: true
-		}));
+		dispatch(doLogin(values))
+		// dispatch(setLogin({
+		// 	...values,
+		// 	isLogin: true
+		// }));
 		utils.setLoginInfo(values.userName)
 		navigate('/', {replace: true})
   };
@@ -32,7 +33,7 @@ function Index (props) {
   };
 	return (
 		<div className="container-y login-page">
-			<h1>仓库管理平台</h1>
+			<h1>DEMO-后台管理</h1>
 			<div className="flex-center form-wrap">
 				<Form
 				size="large"

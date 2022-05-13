@@ -5,10 +5,12 @@ $font_color: green !default;
 
 
 
-// @import "../../../style/myTheme.scss";
+
 
 
 .list-item {
   background-color: $bg_color;
   color: $font_color;
+  text-align: center;
+  margin-bottom: 10px;
 }
